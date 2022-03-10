@@ -3,7 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
-    id "kotlin-parcelize"
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -69,4 +69,8 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
+
+    //
+    def paging_version = "3.0.0-alpha07"
+    implementation "androidx.paging:paging-runtime:$paging_version"
 }
