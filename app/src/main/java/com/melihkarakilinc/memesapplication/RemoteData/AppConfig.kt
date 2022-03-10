@@ -1,4 +1,4 @@
-package com.melihkarakilinc.memesapplication
+package com.melihkarakilinc.memesapplication.RemoteData
 
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit

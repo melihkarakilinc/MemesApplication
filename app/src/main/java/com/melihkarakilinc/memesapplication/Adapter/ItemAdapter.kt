@@ -6,14 +6,19 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.melihkarakilinc.memesapplication.Meme
+import com.melihkarakilinc.memesapplication.Util.ItemClickListener
 import com.melihkarakilinc.memesapplication.databinding.ItemLayoutBinding
 
-class ItemAdapter : PagingDataAdapter<Meme, ItemAdapter.MemeViewHolder>(MemeDiffCallback) {
-
+class ItemAdapter() :
+    PagingDataAdapter<Meme, ItemAdapter.MemeViewHolder>(MemeDiffCallback) {
+    lateinit var clickListener:ItemClickListener
     override fun onBindViewHolder(holder: MemeViewHolder, position: Int) {
         val meme = getItem(position)
         if (meme != null) {
             holder.bind(meme)
+            holder.binding.cardView.setOnClickListener {
+                clickListener.OnItemSelect(meme)
+            }
         }
     }
 
@@ -23,12 +28,10 @@ class ItemAdapter : PagingDataAdapter<Meme, ItemAdapter.MemeViewHolder>(MemeDiff
         return MemeViewHolder(binding)
     }
 
-    class MemeViewHolder(val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MemeViewHolder(val binding: ItemLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(meme: Meme) {
-            with(binding) {
-                binding.meme =meme
-                txtName.text=meme.name
-            }
+            binding.meme = meme
         }
     }
 

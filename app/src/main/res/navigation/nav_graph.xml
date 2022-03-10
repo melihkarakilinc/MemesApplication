@@ -9,10 +9,18 @@
         android:id="@+id/allMemesFragment"
         android:name="com.melihkarakilinc.memesapplication.View.AllMemesFragment"
         android:label="fragment_all_memes"
-        tools:layout="@layout/fragment_all_memes" />
+        tools:layout="@layout/fragment_all_memes" >
+        <action
+            android:id="@+id/action_allMemesFragment_to_detailMemesFragment"
+            app:destination="@id/detailMemesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailMemesFragment"
         android:name="com.melihkarakilinc.memesapplication.View.DetailMemesFragment"
         android:label="fragment_detail_memes"
-        tools:layout="@layout/fragment_detail_memes" />
+        tools:layout="@layout/fragment_detail_memes" >
+        <argument
+            android:name="meme"
+            app:argType="com.melihkarakilinc.memesapplication.Meme" />
+    </fragment>
 </navigation>

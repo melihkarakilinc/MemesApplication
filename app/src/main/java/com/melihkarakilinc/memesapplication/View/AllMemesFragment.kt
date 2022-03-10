@@ -9,15 +9,19 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.melihkarakilinc.memesapplication.Adapter.ItemAdapter
+import com.melihkarakilinc.memesapplication.Meme
 import com.melihkarakilinc.memesapplication.R
+import com.melihkarakilinc.memesapplication.Util.ItemClickListener
 import com.melihkarakilinc.memesapplication.ViewModel.MainViewModel
 import com.melihkarakilinc.memesapplication.databinding.FragmentAllMemesBinding
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collectLatest
 
-class AllMemesFragment : Fragment() {
+class AllMemesFragment : Fragment(),ItemClickListener {
     private val viewModel: MainViewModel by viewModels()
+
     lateinit var binding: FragmentAllMemesBinding
     private val adapter=ItemAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,13 +38,24 @@ class AllMemesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.getMemes().collect {
-                Log.e("ALL_ITEM",it.toString())
-                binding.rv.adapter = adapter
+
+        adapter.clickListener=this
+        binding.rv.adapter = adapter
+        binding.rv.layoutManager =
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.getMemes().collectLatest {
+                Log.e("ALL_ITEM", it.toString())
                 adapter.submitData(it)
             }
         }
+    }
+
+    override fun OnItemSelect(meme: Meme) {
+        val direction = AllMemesFragmentDirections
+            .actionAllMemesFragmentToDetailMemesFragment(meme)
+        findNavController().navigate(direction)
     }
 
 }

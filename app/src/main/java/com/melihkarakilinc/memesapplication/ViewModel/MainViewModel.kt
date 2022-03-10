@@ -6,10 +6,10 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.melihkarakilinc.memesapplication.AppConfig
+import com.melihkarakilinc.memesapplication.Adapter.MemesPagingSource
 import com.melihkarakilinc.memesapplication.Meme
-import com.melihkarakilinc.memesapplication.MemesPagingSource
-import com.melihkarakilinc.memesapplication.Repository
+import com.melihkarakilinc.memesapplication.RemoteData.AppConfig
+import com.melihkarakilinc.memesapplication.Repository.Repository
 import kotlinx.coroutines.flow.Flow
 
 class MainViewModel() : ViewModel() {
@@ -20,13 +20,13 @@ class MainViewModel() : ViewModel() {
 
     fun getMemes(): Flow<PagingData<Meme>> {
         return Pager(
-            config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
+            config = PagingConfig(pageSize = PAGE_SIZE),
             pagingSourceFactory = { MemesPagingSource(repository) }
         ).flow
             .cachedIn(viewModelScope)
     }
 
     companion object {
-        const val PAGE_SIZE =1
+        const val PAGE_SIZE = 0
     }
 }

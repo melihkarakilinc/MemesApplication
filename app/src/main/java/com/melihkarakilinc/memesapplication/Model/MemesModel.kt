@@ -1,6 +1,9 @@
 package com.melihkarakilinc.memesapplication
 
 import android.os.Parcelable
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
+import com.melihkarakilinc.memesapplication.Util.Util
 import kotlinx.parcelize.Parcelize
 
 data class MemesModel(
@@ -21,3 +24,8 @@ data class Meme(
     val url: String,
     val width: Int
 ): Parcelable {}
+@BindingAdapter("setImage")
+fun setImage(imageView: ImageView, path:String) {
+    val util= Util()
+    util.imageLoader(path,imageView)
+}

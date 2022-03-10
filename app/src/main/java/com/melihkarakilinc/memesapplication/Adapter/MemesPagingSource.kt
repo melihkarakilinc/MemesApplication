@@ -1,6 +1,8 @@
-package com.melihkarakilinc.memesapplication
+package com.melihkarakilinc.memesapplication.Adapter
 
 import androidx.paging.PagingSource
+import com.melihkarakilinc.memesapplication.Meme
+import com.melihkarakilinc.memesapplication.Repository.Repository
 
 class MemesPagingSource(private val repository: Repository) : PagingSource<Int, Meme>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Meme> {
