@@ -18,6 +18,10 @@ class MainViewModel() : ViewModel() {
         AppConfig.ApiService()
     )
 
+    init {
+        getMemes()
+    }
+
     fun getMemes(): Flow<PagingData<Meme>> {
         return Pager(
             config = PagingConfig(pageSize = PAGE_SIZE),
