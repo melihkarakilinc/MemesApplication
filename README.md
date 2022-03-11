@@ -1,4 +1,4 @@
-# MemesApplication
+# MemesApplication :see_no_evil:
 Kotlin  - Android - Memes Application (https://api.imgflip.com/get_memes) :iphone:
 
 ## Kullanılan Kütüphane ve Teknolojiler :
